@@ -1,0 +1,7 @@
+
+Customer ID: 911119
+Name: -4834
+Age: 33
+Mobile Number: 729304800
+Address: Flädervägen
+Gender: 15
