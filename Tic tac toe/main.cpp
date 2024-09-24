@@ -10,46 +10,56 @@ bool checkTie(char *spaces);
 
 int main()
 {
-    // Initialize the game board with empty spaces
-    char spaces[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
-    char player = 'P';   // Character representing the player
-    char computer = 'C'; // Character representing the computer
-    bool running = true; // Game running state
+    char playAgain; // Variable to store user's decision to play again
 
-    // Draw the initial empty board
-    drawBoard(spaces);
-
-    // Main game loop
-    while (running)
+    do
     {
-        // Player's turn
-        playerMove(spaces, player);
+        // Initialize the game board with empty spaces
+        char spaces[9] = {' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '};
+        char player = 'P';   // Character representing the player
+        char computer = 'C'; // Character representing the computer
+        bool running = true; // Game running state
+
+        // Draw the initial empty board
         drawBoard(spaces);
-        if (checkTheWinner(spaces, player, computer))
+
+        // Main game loop
+        while (running)
         {
-            running = false; // End the game if there is a winner
-            break;
-        }
-        else if (checkTie(spaces))
-        {
-            running = false; // End the game if there is a tie
-            break;
+            // Player's turn
+            playerMove(spaces, player);
+            drawBoard(spaces);
+            if (checkTheWinner(spaces, player, computer))
+            {
+                running = false; // End the game if there is a winner
+                break;
+            }
+            else if (checkTie(spaces))
+            {
+                running = false; // End the game if there is a tie
+                break;
+            }
+
+            // Computer's turn
+            computerMove(spaces, computer);
+            drawBoard(spaces);
+            if (checkTheWinner(spaces, player, computer))
+            {
+                running = false; // End the game if there is a winner
+                break;
+            }
+            else if (checkTie(spaces))
+            {
+                running = false; // End the game if there is a tie
+                break;
+            }
         }
 
-        // Computer's turn
-        computerMove(spaces, computer);
-        drawBoard(spaces);
-        if (checkTheWinner(spaces, player, computer))
-        {
-            running = false; // End the game if there is a winner
-            break;
-        }
-        else if (checkTie(spaces))
-        {
-            running = false; // End the game if there is a tie
-            break;
-        }
-    }
+        // Ask the user if they want to play again
+        std::cout << "Do you want to play again? (y/n): ";
+        std::cin >> playAgain;
+
+    } while (playAgain == 'y' || playAgain == 'Y'); // Continue if the user inputs 'y' or 'Y'
 
     std::cout << "Thank you for playing!\n";
 
